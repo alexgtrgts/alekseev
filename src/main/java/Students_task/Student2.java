@@ -10,7 +10,7 @@ public class Student2 extends Student {
     }
 
 
-    public void getLearnHours(double talant) {
+    public double getLearnHours(double talant) {
         learnhours = (learnHour*2)/talant;
         flow = learnhours;
         razbor = learnhours;
@@ -20,5 +20,6 @@ public class Student2 extends Student {
         System.out.println("Время на поток " + flow);
         System.out.println("Время на разбор " + razbor);
         System.out.println("Время на практику " + learnhours);
+        return TotalTime;
     }
 }

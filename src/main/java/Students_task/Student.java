@@ -14,7 +14,7 @@ public class Student implements Learning {
     public Student() {
     }
 
-    public void getLearnHours(double talant) {
+    public double getLearnHours(double talant) {
         learnhours = learnHour/talant;
         flow = learnhours;
         razbor = learnhours;
@@ -24,5 +24,6 @@ public class Student implements Learning {
         System.out.println("Время на поток " + flow);
         System.out.println("Время на разбор " + razbor);
         System.out.println("Время на практику " + learnhours);
+        return TotalTime;
     }
 }

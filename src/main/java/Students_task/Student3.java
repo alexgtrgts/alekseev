@@ -10,7 +10,7 @@ public class Student3 extends Student {
     }
 
     @Override
-    public void getLearnHours(double talant) {
+    public double getLearnHours(double talant) {
         learnhours = (learnHour*3)/talant;
         flow = learnhours;
         razbor = learnhours;
@@ -20,6 +20,7 @@ public class Student3 extends Student {
         System.out.println("Время на поток " + flow);
         System.out.println("Время на разбор " + razbor);
         System.out.println("Время на практику " + learnhours);
+        return TotalTime;
     }
 
 }
