@@ -1,36 +1,44 @@
 package DAOExercise;
 
-import java.sql.SQLException;
+import java.sql.*;
 
 import static DAOExercise.DAOPeopleImpl.deleteAll;
 
 public class PeopleImpl {
     public static void main(String[] args) throws Exception {
+        final String URL = "jdbc:mysql://localhost:3306/People";
+        final String username = "root";
+        final String password = "Alex1985.";
         deleteAll();
-        DAOPeople daoPeople = new DAOPeopleImpl();
-        People people1 = new People("Igor","Zadornov",34);
-        People people2 = new People("Inokentiy","Solovyev",19);
-        People people3 = new People("Andrei","Protopopov",23);
-        People people4 = new People("Vladimir","Putin",66);
-        People people5 = new People("Sergey","Zdorov",40);
-        DAOAddress daoAddress = new DAOAddressImpl();
-        Address address1 = new Address("Nezavisimosti", 35);
-        Address address2 = new Address("Losika", 9);
-        Address address3 = new Address("Sharangovicha", 5);
-        Address address4 = new Address("Alibegova", 12);
-        Address address5 = new Address("Filimonova", 9);
-        daoPeople.create(people1);
-        daoPeople.create(people2);
-        daoPeople.create(people3);
-        daoPeople.create(people4);
-        daoPeople.create(people5);
-        daoPeople.deleteFirst(people1);
-        daoPeople.increaseTwoLast(people1);
-        daoAddress.create(address1);
-        daoAddress.create(address2);
-        daoAddress.create(address3);
-        daoAddress.create(address4);
-        daoAddress.create(address5);
-        daoAddress.increaseTwoLast(address4);
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(URL,username,password);
+            Statement stmt = conn.createStatement();
+            conn.setAutoCommit(false);
+            stmt.executeUpdate("INSERT into dao.people(name,surname,age) VALUES('Igor','Zadornov',32)");
+            stmt.executeUpdate("INSERT into dao.people(name,surname,age) VALUES('Oleg','Lomovoi',19)");
+            stmt.executeUpdate("INSERT into dao.people(name,surname,age) VALUES('Andrei','Alekseev',35)");
+            stmt.executeUpdate("INSERT into dao.people(name,surname,age) VALUES('Grigorii','Jarko',25)");
+            stmt.executeUpdate("INSERT into dao.people(name,surname,age) VALUES('Misha','Vorobyev',29)");
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.rollback();
+        }
+
+        try (Connection conn1 = DriverManager.getConnection(URL,username,password);){
+            Statement statement = conn1.createStatement();
+            conn1.setAutoCommit(false);
+            statement.addBatch("INSERT into dao.address(street,house) VALUES('Ignatovskogo',1)");
+            statement.addBatch("INSERT into dao.address(street,house) VALUES('Nezavisimosti',202)");
+            statement.addBatch("INSERT into dao.address(street,house) VALUES('Alibegova',12)");
+            statement.addBatch("INSERT into dao.address(street,house) VALUES('Schkolnaya',16)");
+            statement.addBatch("INSERT into dao.address(street,house) VALUES('Sharangovicha',66)");
+            int[] x = statement.executeBatch();
+            conn1.commit();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
    }
 }
