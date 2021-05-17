@@ -1,7 +1,13 @@
-package DAOExercise;
+package DAOExercise.pojos;
+
+import lombok.*;
 
 import java.util.Objects;
-
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Address {
 
     private String street;

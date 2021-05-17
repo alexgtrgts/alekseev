@@ -1,5 +1,7 @@
 package DAOExercise;
 
+import DAOExercise.pojos.Address;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,19 +13,19 @@ public class DAOAddressImpl implements DAOAddress {
     private final static String username = "root";
     private final static String password = "Alex1985.";
 
-    @Override
-    public Address create(Address address) throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try(Connection conn = DriverManager.getConnection(URL,username,password)) {
-            String insertAnAddress = "INSERT INTO dao.address(street,house) VALUES (?,?)";
-            PreparedStatement prepStatAddress = conn.prepareStatement(insertAnAddress);
-            prepStatAddress.setString(1,address.getStreet());
-            prepStatAddress.setInt(2,address.getHouse());
-            prepStatAddress.executeUpdate();
-        } catch( SQLException e) {
-            e.printStackTrace();
-        } return address;
-    }
+//    @Override
+//    public Address create(Address address) throws SQLException, ClassNotFoundException {
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        try(Connection conn = DriverManager.getConnection(URL,username,password)) {
+//            String insertAnAddress = "INSERT INTO dao.address(street,house) VALUES (?,?)";
+//            PreparedStatement prepStatAddress = conn.prepareStatement(insertAnAddress);
+//            prepStatAddress.setString(1,address.getStreet());
+//            prepStatAddress.setInt(2,address.getHouse());
+//            prepStatAddress.executeUpdate();
+//        } catch( SQLException e) {
+//            e.printStackTrace();
+//        } return address;
+//    }
 
     @Override
     public Address increaseTwoLast(Address address) throws SQLException, ClassNotFoundException {

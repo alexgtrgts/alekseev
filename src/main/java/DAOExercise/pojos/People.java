@@ -1,7 +1,16 @@
-package DAOExercise;
+package DAOExercise.pojos;
+
+
+import lombok.*;
 
 import java.util.Objects;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class People {
 
     private String name;

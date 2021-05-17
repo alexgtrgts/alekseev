@@ -1,5 +1,7 @@
 package DAOExercise;
 
+import DAOExercise.pojos.People;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,21 +13,21 @@ public class DAOPeopleImpl implements DAOPeople{
     private final static String password = "Alex1985.";
 
 
-    @Override
-    public People create(People people) throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        try(Connection conn = DriverManager.getConnection(URL,username,password)) {
-            String insertAPerson = "INSERT INTO dao.people(name,surname,age) VALUES (?,?,?)";
-            PreparedStatement prepStatement = conn.prepareStatement(insertAPerson);
-            prepStatement.setString(1, people.getName());
-            prepStatement.setString(2,people.getSurname());
-            prepStatement.setInt(3,people.getAge());
-            prepStatement.executeUpdate();
-
-        } catch( SQLException e) {
-            e.printStackTrace();
-        } return people;
-    }
+//    @Override
+//    public People create(People people) throws SQLException, ClassNotFoundException {
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        try(Connection conn = DriverManager.getConnection(URL,username,password)) {
+//            String insertAPerson = "INSERT INTO dao.people(name,surname,age) VALUES (?,?,?)";
+//            PreparedStatement prepStatement = conn.prepareStatement(insertAPerson);
+//            prepStatement.setString(1, people.getName());
+//            prepStatement.setString(2,people.getSurname());
+//            prepStatement.setInt(3,people.getAge());
+//            prepStatement.executeUpdate();
+//
+//        } catch( SQLException e) {
+//            e.printStackTrace();
+//        } return people;
+//    }
 
     @Override
     public People increaseTwoLast(People people) throws SQLException, ClassNotFoundException {
@@ -55,8 +57,11 @@ public class DAOPeopleImpl implements DAOPeople{
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection conn = DriverManager.getConnection(URL, username, password)) {
             String deleteAll = "DELETE FROM dao.people";
+            String deleteAllFRomAddress = "DELETE FROM dao.address";
             PreparedStatement preparedStatement = conn.prepareStatement(deleteAll);
+            PreparedStatement preparedStatement1 = conn.prepareStatement(deleteAllFRomAddress);
             preparedStatement.executeUpdate();
+            preparedStatement1.executeUpdate();
         }
     }
 }
