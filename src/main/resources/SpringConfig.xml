@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/aop
+  https://www.springframework.org/schema/aop/spring-aop.xsd
+  http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="studentbean" class="com.spring.a20072021.Student">
+        <property name="name" value="#{student.name}"/>
+        <property name="secondName" value="#{student.secondName}"/>
+        <property name="kurs" value="#{student.kurs}"/>
+        <property name="avMark" value="#{student.avMark}"/>
+        <property name="science" value="#{student.science}"/>
+    </bean>
+
+    <util:list id="students">
+    <bean class="com.spring.a20072021.Student" p:name="Igor" p:secondName="Nemirov" p:kurs="1" p:avMark="3"
+        p:science="maths"/>
+    <bean class="com.spring.a20072021.Student" p:name="Vova" p:secondName="Ivanov" p:kurs="2" p:avMark="2"
+        p:science="literature"/>
+    <bean class="com.spring.a20072021.Student" p:name="Petr" p:secondName="Petrov" p:kurs="3" p:avMark="5"
+          p:science="physics"/>
+    <bean class="com.spring.a20072021.Student" p:name="Sergey" p:secondName="Sidorov" p:kurs="1" p:avMark="5"
+          p:science="fizra"/>
+    <bean class="com.spring.a20072021.Student" p:name="Oleg" p:secondName="Vasiliev" p:kurs="5" p:avMark="2"
+          p:science="physchology"/>
+    <bean class="com.spring.a20072021.Student" p:name="Vasiliy" p:secondName="Beglov" p:kurs="3" p:avMark="3"
+          p:science="avtodelo"/>
+    </util:list>
+
+    <bean id="kursBean" class="com.spring.a20072021.Student" scope="prototype"/>
+
+    <bean id="kursBean" class="com.spring.a20072021.Kurs">
+        <property name="title" value="Title"/>
+        <property name="studentList" value="#{students.?[avMark lt 5]}"/>
+    </bean>
+<!--    <bean id="kursBean2" class="com.spring.a20072021.Kurs">&ndash;&gt;-->
+<!--        <property name="title" value="Title1"/>&ndash;&gt;-->
+<!--       <property name="studentList" value="#{studentList.avMark gt 4}"/>-->
+<!--    </bean>-->
+<!--    <bean id="kursBean2" class="com.spring.a20072021.Kurs">&ndash;&gt;-->
+<!--        <property name="title" value="Title1"/>&ndash;&gt;-->
+<!--        <property name="studentList" value="#{studentList.avMark gt 5}"/>-->
+<!--    </bean>-->
+</beans>
